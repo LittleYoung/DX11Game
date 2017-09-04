@@ -279,14 +279,14 @@ WinGame::~WinGame()
 	SafeRelease(m_pDepthStencilView);
 }
 
-void WinGame::Update(float dt)
-{
-
-}
-
-void WinGame::Render(float dt)
-{
-	m_pImmediateContext->ClearRenderTargetView(m_pRenderTargetView, DirectX::Colors::CornflowerBlue);
-
-	m_pSwapChain->Present(0, 0);
-}
+//void WinGame::Update(float dt)
+//{
+//
+//}
+//
+//void WinGame::Render(float dt)
+//{
+//	m_pImmediateContext->ClearRenderTargetView(m_pRenderTargetView, DirectX::Colors::CornflowerBlue);
+//
+//	m_pSwapChain->Present(0, 0);
+//}

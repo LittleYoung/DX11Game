@@ -13,8 +13,8 @@ public:
 	bool Init();
 	int Run();
 
-	void Update(float dt);
-	void Render(float dt);
+	virtual void Update(float dt) = 0;
+	virtual void Render(float dt) = 0;
 	void CalculateFrameStats();
 
 	LRESULT MsgProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
