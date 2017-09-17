@@ -1,15 +1,15 @@
-#include "Box.h"
+#include "DXApp.h"
 #include <DirectXColors.h>
 
-Box::Box(HINSTANCE hInstance) :WinGame(hInstance, "hello box.")
+DXApp::DXApp(HINSTANCE hInstance) :WinGame(hInstance, "DX11Game_LittleYoung.")
 {
 }
 
-Box::~Box()
+DXApp::~DXApp()
 {
 }
 
-bool Box::Init()
+bool DXApp::Init()
 {
 	if (!WinGame::Init())
 	{
@@ -18,11 +18,11 @@ bool Box::Init()
 	return true;
 }
 
-void Box::Update(float dt)
+void DXApp::Update(float dt)
 {
 }
 
-void Box::Render(float dt)
+void DXApp::Render(float dt)
 {
 	m_pImmediateContext->ClearRenderTargetView(m_pRenderTargetView, DirectX::Colors::CornflowerBlue);
 

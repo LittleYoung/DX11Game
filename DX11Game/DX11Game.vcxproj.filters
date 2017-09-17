@@ -21,27 +21,33 @@
     <ClCompile Include="winmain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="WinGame.cpp">
+    <ClCompile Include="Common\WinGame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GameTimer.cpp">
+    <ClCompile Include="Common\dxerr.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="dxerr.cpp">
+    <ClCompile Include="Common\GameTimer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DXApp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="WinGame.h">
+    <ClInclude Include="Common\GameUtil.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GameTimer.h">
+    <ClInclude Include="Common\WinGame.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GameUtil.h">
+    <ClInclude Include="Common\dxerr.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dxerr.h">
+    <ClInclude Include="Common\GameTimer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DXApp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -19,16 +19,18 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="dxerr.cpp" />
-    <ClCompile Include="GameTimer.cpp" />
-    <ClCompile Include="WinGame.cpp" />
+    <ClCompile Include="DXApp.cpp" />
+    <ClCompile Include="Common\dxerr.cpp" />
+    <ClCompile Include="Common\GameTimer.cpp" />
+    <ClCompile Include="Common\WinGame.cpp" />
     <ClCompile Include="winmain.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="dxerr.h" />
-    <ClInclude Include="GameTimer.h" />
-    <ClInclude Include="GameUtil.h" />
-    <ClInclude Include="WinGame.h" />
+    <ClInclude Include="DXApp.h" />
+    <ClInclude Include="Common\dxerr.h" />
+    <ClInclude Include="Common\GameTimer.h" />
+    <ClInclude Include="Common\GameUtil.h" />
+    <ClInclude Include="Common\WinGame.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{027C784E-E904-4BA0-9C40-F8944ACE11CD}</ProjectGuid>

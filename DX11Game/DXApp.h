@@ -1,11 +1,11 @@
 #pragma once
-#include "WinGame.h"
+#include "Common\WinGame.h"
 
-class Box :public WinGame
+class DXApp :public WinGame
 {
 public:
-	Box(HINSTANCE);
-	~Box();
+	DXApp(HINSTANCE);
+	~DXApp();
 
 	bool Init();
 
