@@ -3,6 +3,8 @@
 #include <d3d11.h>
 #include <string>
 #include "GameTimer.h"
+#include "GameCamera.h"
+#include "LightHelper.h"
 
 class WinGame
 {
@@ -10,12 +12,18 @@ public:
 	WinGame(HINSTANCE hInstance, std::string appTitle);
 	~WinGame();
 
-	bool Init();
+	virtual bool Init();
 	int Run();
 
 	virtual void Update(float dt) = 0;
 	virtual void Render(float dt) = 0;
 	void CalculateFrameStats();
+
+	// Convenience overrides for handling mouse input.
+	virtual void OnMouseDown(WPARAM btnState, int x, int y);
+	virtual void OnMouseUp(WPARAM btnState, int x, int y);
+	virtual void OnMouseMove(WPARAM btnState, int x, int y);
+
 
 	LRESULT MsgProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
@@ -24,6 +32,9 @@ public:
 
 	ID3D11Device* GetDevice() { return m_pDevice; }
 	ID3D11DeviceContext* GetContext() { return m_pImmediateContext; }
+	const GameCamera& GetCamera() { return m_Cam; }
+	const DirectionalLight& GetLight() { return m_DirLight; }
+	const ShadowInfo& GetShadow() { return m_ShadowInfo; }
 	static WinGame* GetInstance() { return s_Instance; }
 
 private:
@@ -32,6 +43,7 @@ private:
 
 protected:
 	GameTimer		m_GameTimer;
+	GameCamera		m_Cam;
 	UINT			m_ClientWidth;
 	UINT			m_ClientHeight;
 	DWORD			m_WndStyle;
@@ -54,4 +66,8 @@ protected:
 	D3D11_VIEWPORT m_ScreenViewPort;
 
 	static WinGame* s_Instance;
+
+	XMFLOAT2				m_LastMousePos;
+	DirectionalLight		m_DirLight;
+	ShadowInfo				m_ShadowInfo;
 };

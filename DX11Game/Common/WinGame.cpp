@@ -3,6 +3,7 @@
 #include <windowsx.h>
 #include <sstream>
 #include "GameUtil.h"
+#include "MathHelper.h"
 #include <DirectXColors.h>
 
 LRESULT CALLBACK MainWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
@@ -34,6 +35,13 @@ WinGame::WinGame(HINSTANCE hInstance, std::string appTitle)
 {
 	assert(s_Instance == nullptr);
 	s_Instance = this;
+
+	m_DirLight.Ambient = XMFLOAT4(0.2f, 0.2f, 0.2f, 1.0f);
+	m_DirLight.Diffuse = XMFLOAT4(0.6f, 0.6f, 0.6f, 1.0f);
+	m_DirLight.Specular = XMFLOAT4(0.5f, 0.5f, 0.5f, 1.0f);
+	m_DirLight.Direction = XMFLOAT3(0.57735f, -0.57735f, 0.57735f);
+
+	m_Cam.SetLens(0.25f*MathHelper::Pi, static_cast<float>(m_ClientWidth) / m_ClientHeight, 1.0f, 1000.0f);
 }
 
 
@@ -279,14 +287,58 @@ WinGame::~WinGame()
 	SafeRelease(m_pDepthStencilView);
 }
 
-//void WinGame::Update(float dt)
-//{
-//
-//}
-//
+void WinGame::Update(float dt)
+{
+	//
+	// Control the camera.
+	//
+	if (GetAsyncKeyState('W') & 0x8000)
+		m_Cam.Walk(10.0f*dt);
+
+	if (GetAsyncKeyState('S') & 0x8000)
+		m_Cam.Walk(-10.0f*dt);
+
+	if (GetAsyncKeyState('A') & 0x8000)
+		m_Cam.Strafe(-10.0f*dt);
+
+	if (GetAsyncKeyState('D') & 0x8000)
+		m_Cam.Strafe(10.0f*dt);
+
+	m_Cam.UpdateMatrix();
+}
+
 //void WinGame::Render(float dt)
 //{
 //	m_pImmediateContext->ClearRenderTargetView(m_pRenderTargetView, DirectX::Colors::CornflowerBlue);
 //
 //	m_pSwapChain->Present(0, 0);
 //}
+
+void WinGame::OnMouseDown(WPARAM btnState, int x, int y)
+{
+	m_LastMousePos.x = (float)x;
+	m_LastMousePos.y = (float)y;
+
+	SetCapture(m_hAppWnd);
+}
+
+void WinGame::OnMouseUp(WPARAM btnState, int x, int y) 
+{
+	ReleaseCapture();
+}
+
+void WinGame::OnMouseMove(WPARAM btnState, int x, int y) 
+{
+	if ((btnState & MK_LBUTTON) != 0)
+	{
+		// Make each pixel correspond to a quarter of a degree.
+		float dx = XMConvertToRadians(0.25f*static_cast<float>(x - m_LastMousePos.x));
+		float dy = XMConvertToRadians(0.25f*static_cast<float>(y - m_LastMousePos.y));
+
+		m_Cam.Pitch(dy);
+		m_Cam.RotateY(dx);
+	}
+
+	m_LastMousePos.x = (float)x;
+	m_LastMousePos.y = (float)y;
+}
