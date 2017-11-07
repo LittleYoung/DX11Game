@@ -109,6 +109,14 @@ void GameCamera::Walk(float d)
 	XMStoreFloat3(&m_Position, XMVectorMultiplyAdd(s, l, p));
 }
 
+void GameCamera::Up(float d)
+{
+	XMVECTOR s = XMVectorReplicate(d);
+	XMVECTOR l = XMLoadFloat3(&m_Up);
+	XMVECTOR p = XMLoadFloat3(&m_Position);
+	XMStoreFloat3(&m_Position, XMVectorMultiplyAdd(s, l, p));
+}
+
 void GameCamera::Strafe(float d)
 {
 	XMVECTOR s = XMVectorReplicate(d);

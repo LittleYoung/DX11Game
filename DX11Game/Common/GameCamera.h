@@ -11,8 +11,9 @@ public:
 	void SetLens(float fovY, float aspect, float zn, float zf);
 	void LookAt(FXMVECTOR pos, FXMVECTOR target, FXMVECTOR worldUp);
 
-	void Walk(float d);
-	void Strafe(float d);
+	void Walk(float d);		//前后移动
+	void Up(float d);		//上下移动
+	void Strafe(float d);	//左右移动
 	void Pitch(float a);
 	void RotateY(float a);
 

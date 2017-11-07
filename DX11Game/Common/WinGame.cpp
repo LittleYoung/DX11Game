@@ -83,15 +83,15 @@ LRESULT WinGame::MsgProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		return 0;
 	case WM_RBUTTONDOWN:
 	case WM_LBUTTONDOWN:
-		//OnMouseDown(wParam, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
+		OnMouseDown(wParam, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
 		return 0;
 	case WM_RBUTTONUP:
 	case WM_MBUTTONUP:
 	case WM_LBUTTONUP:
-		//OnMouseUp(wParam, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
+		OnMouseUp(wParam, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
 		return 0;
 	case WM_MOUSEMOVE:
-		//OnMouseMove(wParam, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
+		OnMouseMove(wParam, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
 		return 0;
 	default:
 		return DefWindowProc(hwnd, msg, wParam, lParam);
@@ -304,20 +304,24 @@ void WinGame::Update(float dt)
 	if (GetAsyncKeyState('D') & 0x8000)
 		m_Cam.Strafe(10.0f*dt);
 
+	if (GetAsyncKeyState('Q') & 0x8000)
+		m_Cam.Up(10.0f*dt);
+
+	if (GetAsyncKeyState('E') & 0x8000)
+		m_Cam.Up(-10.0f*dt);
+
 	m_Cam.UpdateMatrix();
 }
 
-//void WinGame::Render(float dt)
-//{
-//	m_pImmediateContext->ClearRenderTargetView(m_pRenderTargetView, DirectX::Colors::CornflowerBlue);
-//
-//	m_pSwapChain->Present(0, 0);
-//}
+void WinGame::Render(float dt)
+{
+	
+}
 
 void WinGame::OnMouseDown(WPARAM btnState, int x, int y)
 {
-	m_LastMousePos.x = (float)x;
-	m_LastMousePos.y = (float)y;
+	m_LastMousePos.x = float(x);
+	m_LastMousePos.y = float(y);
 
 	SetCapture(m_hAppWnd);
 }
@@ -339,6 +343,6 @@ void WinGame::OnMouseMove(WPARAM btnState, int x, int y)
 		m_Cam.RotateY(dx);
 	}
 
-	m_LastMousePos.x = (float)x;
-	m_LastMousePos.y = (float)y;
+	m_LastMousePos.x = float(x);
+	m_LastMousePos.y = float(y);
 }

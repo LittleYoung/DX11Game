@@ -1,6 +1,8 @@
 #pragma once
 #include "Common\WinGame.h"
 #include "Rain.h"
+#include "Terrain.h"
+#include "Sky.h"
 
 class DXApp :public WinGame
 {
@@ -14,5 +16,7 @@ public:
 	void Render(float dt);
 
 private:
-	Rain m_Rain;
+	Rain	m_Rain;
+	Terrain	m_Terrain;
+	Sky		m_Sky;
 };
